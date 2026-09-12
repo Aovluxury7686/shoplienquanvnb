@@ -246,6 +246,150 @@
             color: #00d2ff;
         }
 
+        /* MODAL COMMON STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-card {
+            background: #ffffff;
+            color: #1a1a1a;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 360px;
+            padding: 24px 20px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 32px;
+            height: 32px;
+            background: #f0f2f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #666;
+            font-size: 1rem;
+            border: none;
+        }
+
+        /* NOTICE MODAL STYLES */
+        .notice-icon {
+            font-size: 3rem;
+            color: #ff9900;
+            margin-bottom: 12px;
+        }
+
+        .notice-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #002b66;
+            margin-bottom: 10px;
+        }
+
+        .notice-desc {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .btn-confirm {
+            background: linear-gradient(90deg, #0052cc, #00aaff);
+            color: #ffffff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 150, 255, 0.4);
+            width: 100%;
+        }
+
+        .btn-confirm:hover {
+            background: linear-gradient(90deg, #0066ff, #00e5ff);
+        }
+
+        /* PAYMENT MODAL STYLES */
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .modal-subtitle {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .recipient-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #002b66;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .transfer-content {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0077ff;
+            background: #eef6ff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .qr-box {
+            position: relative;
+            display: inline-block;
+            margin: 6px 0;
+            border: 3px solid #0052cc;
+            border-radius: 16px;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .qr-box img {
+            width: 180px;
+            height: 180px;
+            display: block;
+        }
+
+        .payment-amount {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #0052cc;
+            margin: 8px 0 0 0;
+        }
+
         @media (max-width: 768px) {
             .grid-container { grid-template-columns: 1fr; }
             .card-full { grid-column: span 1; }
@@ -284,7 +428,7 @@
                     </div>
                 </div>
                 <div class="discount-tag">12%</div>
-                <a href="https://t.me/binnapgame" target="_blank" class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</a>
+                <button type="button" class="btn-buy" onclick="showNotice('4,400đ')"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</button>
             </div>
 
             <!-- Gói 10,000 -->
@@ -304,7 +448,7 @@
                     </div>
                 </div>
                 <div class="discount-tag">12%</div>
-                <a href="https://t.me/binnapgame" target="_blank" class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</a>
+                <button type="button" class="btn-buy" onclick="showNotice('8,800đ')"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</button>
             </div>
 
             <!-- Gói 20,000 -->
@@ -324,7 +468,7 @@
                     </div>
                 </div>
                 <div class="discount-tag">12%</div>
-                <a href="https://t.me/binnapgame" target="_blank" class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</a>
+                <button type="button" class="btn-buy" onclick="showNotice('17,600đ')"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</button>
             </div>
 
             <!-- Gói 50,000 -->
@@ -344,7 +488,7 @@
                     </div>
                 </div>
                 <div class="discount-tag">12%</div>
-                <a href="https://t.me/binnapgame" target="_blank" class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</a>
+                <button type="button" class="btn-buy" onclick="showNotice('44,000đ')"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</button>
             </div>
 
             <!-- Gói 100,000 -->
@@ -364,7 +508,7 @@
                     </div>
                 </div>
                 <div class="discount-tag">12%</div>
-                <a href="https://t.me/binnapgame" target="_blank" class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</a>
+                <button type="button" class="btn-buy" onclick="showNotice('88,000đ')"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</button>
             </div>
 
             <!-- Gói 200,000 -->
@@ -384,7 +528,7 @@
                     </div>
                 </div>
                 <div class="discount-tag">12%</div>
-                <a href="https://t.me/binnapgame" target="_blank" class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</a>
+                <button type="button" class="btn-buy" onclick="showNotice('176,000đ')"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</button>
             </div>
 
             <!-- Gói 500,000 -->
@@ -404,7 +548,7 @@
                     </div>
                 </div>
                 <div class="discount-tag">12%</div>
-                <a href="https://t.me/binnapgame" target="_blank" class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</a>
+                <button type="button" class="btn-buy" onclick="showNotice('440,000đ')"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</button>
             </div>
 
             <!-- Gói 1,000,000 -->
@@ -424,7 +568,7 @@
                     </div>
                 </div>
                 <div class="discount-tag">12%</div>
-                <a href="https://t.me/binnapgame" target="_blank" class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</a>
+                <button type="button" class="btn-buy" onclick="showNotice('880,000đ')"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</button>
             </div>
 
             <!-- Gói 2,000,000 -->
@@ -448,7 +592,7 @@
 
                 <div style="display: flex; align-items: center;">
                     <div class="discount-tag" style="font-size: 0.95rem; padding: 6px 12px;">12%</div>
-                    <a href="https://t.me/binnapgame" target="_blank" class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</a>
+                    <button type="button" class="btn-buy" onclick="showNotice('1,760,000đ')"><i class="fa-solid fa-cart-shopping"></i> MUA NGAY</button>
                 </div>
             </div>
 
@@ -491,5 +635,85 @@
         </div>
     </div>
 
+    <!-- 1. CỬA SỔ THÔNG BÁO YÊU CẦU THANH TOÁN TRƯỚC -->
+    <div class="modal-overlay" id="noticeModal">
+        <div class="modal-card">
+            <button class="close-btn" onclick="closeNotice()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="notice-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <div class="notice-title">THÔNG BÁO THANH TOÁN</div>
+            <div class="notice-desc">Vui lòng thanh toán trước để nhận quân huy! Hệ thống sẽ tự động cộng quân huy ngay sau khi nhận được chuyển khoản.</div>
+            <button class="btn-confirm" onclick="proceedToPayment()">ĐỒNG Ý THANH TOÁN</button>
+        </div>
+    </div>
+
+    <!-- 2. CỬA SỔ MÃ QR THANH TOÁN (MODAL) -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-card">
+            <button class="close-btn" onclick="closePayment()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-title">Mã nhận tiền</div>
+            <div class="modal-subtitle">Quét để chuyển tiền đến</div>
+            <div class="recipient-name">LUC QUOC HUY</div>
+            
+            <div class="transfer-content">Nội dung chuyển khoản: <span id="transferContentText">aly$</span></div>
+
+            <div class="qr-box">
+                <img id="qrCodeImg" src="" alt="Mã QR Thanh Toán">
+            </div>
+
+            <div class="payment-amount" id="modalPrice">4,400đ</div>
+        </div>
+    </div>
+
+    <script>
+        let selectedPrice = '';
+
+        // Hiển thị thông báo "Thanh toán trước"
+        function showNotice(price) {
+            selectedPrice = price;
+            document.getElementById('noticeModal').style.display = 'flex';
+        }
+
+        // Đóng thông báo
+        function closeNotice() {
+            document.getElementById('noticeModal').style.display = 'none';
+        }
+
+        // Chuyển sang màn hình Mã QR Thanh Toán
+        function proceedToPayment() {
+            closeNotice();
+            
+            document.getElementById('modalPrice').innerText = selectedPrice;
+            
+            // Tách lấy giá trị số nguyên từ chuỗi (VD: "4,400đ" -> "4400")
+            const cleanAmount = selectedPrice.replace(/[^0-9]/g, '');
+            
+            // Định dạng nội dung: aly + số tiền + $ (VD: aly4400$)
+            const transferCode = `aly${cleanAmount}$`;
+            document.getElementById('transferContentText').innerText = transferCode;
+            
+            // Cập nhật đường dẫn Mã QR VietQR
+            const qrUrl = `https://img.vietqr.io/image/970422-999999999-compact.png?amount=${cleanAmount}&addInfo=${encodeURIComponent(transferCode)}&accountName=LUC%20QUOC%20HUY`;
+            document.getElementById('qrCodeImg').src = qrUrl;
+            
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        // Đóng màn hình QR
+        function closePayment() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // Đóng modal khi click ra ngoài vùng trắng
+        window.onclick = function(event) {
+            const noticeModal = document.getElementById('noticeModal');
+            const paymentModal = document.getElementById('paymentModal');
+            if (event.target == noticeModal) {
+                closeNotice();
+            }
+            if (event.target == paymentModal) {
+                closePayment();
+            }
+        }
+    </script>
 </body>
 </html>
