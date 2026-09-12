@@ -173,7 +173,6 @@
             flex-shrink: 0;
         }
 
-        /* NÚT MUA NGAY */
         .btn-buy {
             background: linear-gradient(90deg, #0052cc, #00aaff);
             border: 1.5px solid #00ffff;
@@ -253,12 +252,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
         }
 
         .modal-card {
@@ -266,7 +265,7 @@
             color: #1a1a1a;
             border-radius: 20px;
             width: 90%;
-            max-width: 360px;
+            max-width: 380px;
             padding: 24px 20px;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -275,7 +274,7 @@
         }
 
         @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
+            from { transform: scale(0.85); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
@@ -294,6 +293,7 @@
             color: #666;
             font-size: 1rem;
             border: none;
+            z-index: 10;
         }
 
         /* NOTICE MODAL STYLES */
@@ -335,59 +335,50 @@
         }
 
         /* PAYMENT MODAL STYLES */
-        .modal-title {
-            font-size: 1rem;
+        .account-number {
+            font-size: 0.95rem;
             font-weight: 700;
-            color: #333;
-            margin-bottom: 4px;
-        }
-
-        .modal-subtitle {
-            font-size: 0.8rem;
-            color: #666;
+            color: #d32f2f;
             margin-bottom: 8px;
         }
 
-        .recipient-name {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #002b66;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
-
         .transfer-content {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #0077ff;
             background: #eef6ff;
             padding: 6px 12px;
             border-radius: 8px;
             display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 8px;
+            font-size: 0.9rem;
         }
 
-        .qr-box {
-            position: relative;
-            display: inline-block;
-            margin: 6px 0;
-            border: 3px solid #0052cc;
-            border-radius: 16px;
-            padding: 10px;
-            background: #fff;
+        .info-item:last-child {
+            margin-bottom: 0;
         }
 
-        .qr-box img {
-            width: 180px;
-            height: 180px;
-            display: block;
+        .info-label {
+            color: #666;
         }
 
-        .payment-amount {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #0052cc;
-            margin: 8px 0 0 0;
+        .info-value {
+            font-weight: 700;
+            color: #1a1a1a;
         }
 
         @media (max-width: 768px) {
@@ -646,73 +637,68 @@
         </div>
     </div>
 
-    <!-- 2. CỬA SỔ MÃ QR THANH TOÁN (MODAL) -->
+    <!-- 2. CỬA SỔ CHUYỂN KHOẢN ZALOPAY (MODAL) -->
     <div class="modal-overlay" id="paymentModal">
         <div class="modal-card">
             <button class="close-btn" onclick="closePayment()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-title">Mã nhận tiền</div>
-            <div class="modal-subtitle">Quét để chuyển tiền đến</div>
-            <div class="recipient-name">LUC QUOC HUY</div>
             
-            <div class="transfer-content">Nội dung chuyển khoản: <span id="transferContentText">aly$</span></div>
+            <div class="notice-title" style="margin-bottom: 15px;">THANH TOÁN ZALOPAY</div>
+            
+            <div class="account-number">STK / SĐT: <span id="accountNumberText">0919503869</span></div>
+            <div class="transfer-content">Nội dung CK: <span id="transferContentText">aly4400$</span></div>
 
-            <div class="qr-box">
-                <img id="qrCodeImg" src="" alt="Mã QR Thanh Toán">
+            <div class="info-box">
+                <div class="info-item">
+                    <span class="info-label">Ví thanh toán:</span>
+                    <span class="info-value" style="color: #0088ff;">ZaloPay</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Số tài khoản:</span>
+                    <span class="info-value">0919503869</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Số tiền:</span>
+                    <span class="info-value" id="displayAmount">4,400đ</span>
+                </div>
             </div>
-
-            <div class="payment-amount" id="modalPrice">4,400đ</div>
         </div>
     </div>
 
     <script>
         let selectedPrice = '';
+        const zaloPayAccount = '0919503869';
 
-        // Hiển thị thông báo "Thanh toán trước"
         function showNotice(price) {
             selectedPrice = price;
             document.getElementById('noticeModal').style.display = 'flex';
         }
 
-        // Đóng thông báo
         function closeNotice() {
             document.getElementById('noticeModal').style.display = 'none';
         }
 
-        // Chuyển sang màn hình Mã QR Thanh Toán
         function proceedToPayment() {
             closeNotice();
             
-            document.getElementById('modalPrice').innerText = selectedPrice;
+            document.getElementById('accountNumberText').innerText = zaloPayAccount;
+            document.getElementById('displayAmount').innerText = selectedPrice;
             
-            // Tách lấy giá trị số nguyên từ chuỗi (VD: "4,400đ" -> "4400")
             const cleanAmount = selectedPrice.replace(/[^0-9]/g, '');
-            
-            // Định dạng nội dung: aly + số tiền + $ (VD: aly4400$)
             const transferCode = `aly${cleanAmount}$`;
             document.getElementById('transferContentText').innerText = transferCode;
-            
-            // Cập nhật đường dẫn Mã QR VietQR
-            const qrUrl = `https://img.vietqr.io/image/970422-999999999-compact.png?amount=${cleanAmount}&addInfo=${encodeURIComponent(transferCode)}&accountName=LUC%20QUOC%20HUY`;
-            document.getElementById('qrCodeImg').src = qrUrl;
             
             document.getElementById('paymentModal').style.display = 'flex';
         }
 
-        // Đóng màn hình QR
         function closePayment() {
             document.getElementById('paymentModal').style.display = 'none';
         }
 
-        // Đóng modal khi click ra ngoài vùng trắng
         window.onclick = function(event) {
             const noticeModal = document.getElementById('noticeModal');
             const paymentModal = document.getElementById('paymentModal');
-            if (event.target == noticeModal) {
-                closeNotice();
-            }
-            if (event.target == paymentModal) {
-                closePayment();
-            }
+            if (event.target == noticeModal) closeNotice();
+            if (event.target == paymentModal) closePayment();
         }
     </script>
 </body>
